@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Compare Property - RENTAL ARENA</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .sidebar {
+            width: 200px;
+            height: 100vh;
+            background-color: #2c3e50;
+            color: white;
+            position: fixed;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar h3 {
+            margin-top: 0;
+            font-size: 24px;
+        }
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .sidebar ul li {
+            padding: 10px 0;
+        }
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .sidebar ul li a:hover {
+            color: #f1c40f; /* Orange accent from Figma */
+        }
+        .sidebar p {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        .main-content {
+            margin-left: 220px;
+            padding: 20px;
+        }
+        .main-content h2 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        .filters {
+            margin-bottom: 20px;
+        }
+        .filter-select {
+            padding: 5px;
+            margin-right: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .property-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .property-card {
+            background-color: #ecf0f1;
+            padding: 10px;
+            border-radius: 10px;
+            width: 200px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .property-card img {
+            width: 100%;
+            border-radius: 5px;
+        }
+        .property-card a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        .property-card a:hover {
+            color: #f1c40f;
+        }
+        .action-btn {
+            background-color: #333;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+            position: relative;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h3>RENTAL ARENA</h3>
+        <ul>
+            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('search_property') }}">Search Property</a></li>
+            <li><a href="{{ url_for('compare_property') }}">Compare Property</a></li>
+            <li><a href="{{ url_for('settings') }}">Settings</a></li>
+            <li><a href="{{ url_for('profile') }}">Profile</a></li>
+            <li><a href="{{ url_for('support') }}">Support</a></li>
+            <li><a href="{{ url_for('admin_info') }}">Admin Info</a></li>
+        </ul>
+        <p>Welcome back 😊 Jonathan</p>
+    </div>
+    <div class="main-content">
+        <h2>Compare Property</h2>
+        <div class="filters">
+            <select class="filter-select" disabled>
+                <option value="">Search Location</option>
+                <option value="redmond">Redmond, WA</option>
+                <option value="seattle">Seattle, WA</option>
+                <option value="bellevue">Bellevue, WA</option>
+            </select>
+            <select class="filter-select" disabled>
+                <option value="">Amenities</option>
+                <option value="pool">Pool</option>
+                <option value="gym">Gym</option>
+                <option value="parking">Parking</option>
+            </select>
+            <select class="filter-select" disabled>
+                <option value="">Square Feet</option>
+                <option value="1000">1000+</option>
+                <option value="2000">2000+</option>
+                <option value="3000">3000+</option>
+            </select>
+            <select class="filter-select" disabled>
+                <option value="">Leasing End Date Range</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+            </select>
+            <select class="filter-select" disabled>
+                <option value="">Listing Type</option>
+                <option value="rent">Rent</option>
+                <option value="sale">Sale</option>
+            </select>
+        </div>
+        <div class="property-grid">
+            <div class="property-card">
+                <img src="https://via.placeholder.com/180x120" alt="Property 1">
+                <p><strong>2406 175th Ave NE</strong><br>$1,200/mo<br>Lease: 12/12/2025</p>
+                <a href="#">Suggested Rent Comparisons</a>
+            </div>
+            <div class="property-card">
+                <img src="https://via.placeholder.com/180x120" alt="Property 2">
+                <p><strong>1234 Maple St</strong><br>$950/mo<br>Lease: 01/15/2026</p>
+                <a href="#">Suggested Rent Comparisons</a>
+            </div>
+            <div class="property-card">
+                <img src="https://via.placeholder.com/180x120" alt="Property 3">
+                <p><strong>5678 Pine Rd</strong><br>$1,500/mo<br>Lease: 06/30/2025</p>
+                <a href="#">Suggested Rent Comparisons</a>
+            </div>
+            <div class="property-card">
+                <img src="https://via.placeholder.com/180x120" alt="Property 4">
+                <p><strong>9012 Oak St</strong><br>$1,300/mo<br>Lease: 03/20/2026</p>
+                <a href="#">Suggested Rent Comparisons</a>
+            </div>
+            <div class="property-card">
+                <img src="https://via.placeholder.com/180x120" alt="Property 5">
+                <p><strong>3456 Cedar Ln</strong><br>$1,100/mo<br>Lease: 09/10/2025</p>
+                <a href="#">Suggested Rent Comparisons</a>
+            </div>
+            <div class="property-card">
+                <img src="https://via.placeholder.com/180x120" alt="Property 6">
+                <p><strong>7890 Birch Ave</strong><br>$1,400/mo<br>Lease: 11/25/2025</p>
+                <a href="#">Suggested Rent Comparisons</a>
+            </div>
+            <div class="property-card">
+                <img src="https://via.placeholder.com/180x120" alt="Property 7">
+                <p><strong>4321 Elm St</strong><br>$1,250/mo<br>Lease: 04/15/2026</p>
+                <a href="#">Suggested Rent Comparisons</a>
+            </div>
+            <div class="property-card">
+                <img src="https://via.placeholder.com/180x120" alt="Property 8">
+                <p><strong>8765 Spruce Dr</strong><br>$1,350/mo<br>Lease: 08/05/2025</p>
+                <a href="#">Suggested Rent Comparisons</a>
+            </div>
+        </div>
+        <button class="action-btn" onclick="document.getElementById('modal').style.display='block'">Select Property</button>
+        <button class="action-btn">Save Search</button>
+        <button class="action-btn">Pull Data</button>
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" onclick="document.getElementById('modal').style.display='none'">&times;</span>
+                <h3>2406 175th Ave NE</h3>
+                <p><strong>Description:</strong> A modern 3-bedroom home with a spacious layout.</p>
+                <p><strong>Facts:</strong> 2400 Sq Ft, Built 2015</p>
+                <p><strong>Amenities:</strong> Outdoor common areas, Parking</p>
+                <p><strong>Policies:</strong> No pets, 12-month lease</p>
+                <button class="action-btn">Select Property</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Ensure modal closes when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        };
+    </script>
+</body>
+</html>

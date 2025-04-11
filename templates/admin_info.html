@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Info - RENTAL ARENA</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .sidebar {
+            width: 200px;
+            height: 100vh;
+            background-color: #2c3e50;
+            color: white;
+            position: fixed;
+            padding: 20px;
+        }
+        .sidebar h3 { margin-top: 0; }
+        .sidebar ul { list-style-type: none; padding: 0; }
+        .sidebar ul li { padding: 10px 0; }
+        .sidebar ul li a { color: white; text-decoration: none; }
+        .main-content {
+            margin-left: 220px;
+            padding: 20px;
+        }
+        .admin-info {
+            max-width: 600px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h3>RENTAL ARENA</h3>
+        <ul>
+            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('search_property') }}">Search Property</a></li>
+            <li><a href="{{ url_for('compare_property') }}">Compare Property</a></li>
+            <li><a href="{{ url_for('settings') }}">Settings</a></li>
+            <li><a href="{{ url_for('profile') }}">Profile</a></li>
+            <li><a href="{{ url_for('support') }}">Support</a></li>
+            <li><a href="{{ url_for('admin_info') }}">Admin Info</a></li>
+        </ul>
+        <p>Welcome back</p>
+    </div>
+    <div class="main-content">
+        <h2>Admin Info</h2>
+        <div class="admin-info">
+            <p><strong>Name:</strong> HASWANTH R</p>
+            <p><strong>Course & Programme:</strong> M.Sc DATA SCIENCE</p>
+            <p><strong>Year:</strong> 3rd</p>
+            <p><strong>LinkedIn Profile:</strong> <a href="https://www.linkedin.com/in/haswanthr/">Haswanth R </a></p>
+            <p><strong>GitHub Profile:</strong> <a href="https://github.com/HaswanthR-CIT">HaswanthR-CIT</a></p>
+        </div>
+    </div>
+</body>
+</html>

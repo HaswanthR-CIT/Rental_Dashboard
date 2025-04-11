@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - AppCopilot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #ecf0f1;
+        }
+        .sidebar {
+            width: 200px;
+            height: 100vh;
+            background-color: #2c3e50;
+            color: white;
+            position: fixed;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar h3 {
+            margin-top: 0;
+            font-size: 24px;
+        }
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .sidebar ul li {
+            padding: 10px 0;
+        }
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .sidebar ul li a:hover {
+            color: #f1c40f;
+        }
+        .sidebar p {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        .main-content {
+            margin-left: 220px;
+            padding: 30px;
+        }
+        .main-content h2 {
+            color: #2c3e50;
+        }
+        .cards-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .card {
+            flex: 1;
+            min-width: 180px;
+            background-color: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .section {
+            margin-top: 30px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .section h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            text-align: left;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #34495e;
+            color: white;
+        }
+        canvas {
+            max-width: 100%;
+        }
+        ul.notifications {
+            list-style: none;
+            padding: 0;
+        }
+        ul.notifications li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h3>APPCOPILOT</h3>
+        <ul>
+            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('search_property') }}">Search Property</a></li>
+            <li><a href="{{ url_for('compare_property') }}">Compare Property</a></li>
+            <li><a href="{{ url_for('settings') }}">Settings</a></li>
+            <li><a href="{{ url_for('profile') }}">Profile</a></li>
+            <li><a href="{{ url_for('support') }}">Support</a></li>
+            <li><a href="{{ url_for('admin_info') }}">Admin Info</a></li>
+        </ul>
+        <p>Welcome back Jonathan</p>
+    </div>
+
+    <div class="main-content">
+        <h2>Dashboard</h2>
+
+        <div class="cards-container">
+            <div class="card">
+                <h3>Total Properties</h3>
+                <p>7,210</p>
+            </div>
+            <div class="card">
+                <h3>Active Listings</h3>
+                <p>510</p>
+            </div>
+            <div class="card">
+                <h3>Lease Expiring</h3>
+                <p>90</p>
+            </div>
+            <div class="card">
+                <h3>New Inquiries</h3>
+                <p>134</p>
+            </div>
+            <div class="card">
+                <h3>Revenue (This Month)</h3>
+                <p>$82,300</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>Property Overview Chart</h3>
+            <canvas id="myChart"></canvas>
+        </div>
+
+        <div class="section">
+            <h3>Recent Activities</h3>
+            <ul>
+                <li>🕒 You added 2 new properties today.</li>
+                <li>📝 John updated "Sunset Villa" lease terms.</li>
+                <li>📩 3 new support messages received.</li>
+                <li>🏢 "Orchid Residency" listed as Active.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>Top Performing Properties</h3>
+            <table>
+                <tr>
+                    <th>Property</th>
+                    <th>Location</th>
+                    <th>Occupancy</th>
+                    <th>Revenue</th>
+                </tr>
+                <tr>
+                    <td>Orchid Residency</td>
+                    <td>New York</td>
+                    <td>98%</td>
+                    <td>$12,000</td>
+                </tr>
+                <tr>
+                    <td>Sunset Villa</td>
+                    <td>Los Angeles</td>
+                    <td>95%</td>
+                    <td>$10,800</td>
+                </tr>
+                <tr>
+                    <td>Hilltop Mansion</td>
+                    <td>San Francisco</td>
+                    <td>89%</td>
+                    <td>$9,500</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h3>Notifications</h3>
+            <ul class="notifications">
+                <li>🟡 Your listing “Green Acres” is due for renewal.</li>
+                <li>🔴 Payment failed for Property ID 1021.</li>
+                <li>🟢 Backup completed successfully.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Total Properties', 'Active Listings', 'Lease Expiring', 'New Inquiries', 'Revenue'],
+                datasets: [{
+                    label: 'Metrics',
+                    data: [7210, 510, 90, 134, 82300],
+                    backgroundColor: [
+                        '#2980b9',
+                        '#27ae60',
+                        '#e67e22',
+                        '#8e44ad',
+                        '#f39c12'
+                    ],
+                    borderColor: '#2c3e50',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

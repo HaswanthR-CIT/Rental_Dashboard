@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile - RENTAL ARENA</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .sidebar {
+            width: 200px;
+            height: 100vh;
+            background-color: #2c3e50;
+            color: white;
+            position: fixed;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar h3 {
+            margin-top: 0;
+            font-size: 24px;
+        }
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .sidebar ul li {
+            padding: 10px 0;
+        }
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .sidebar ul li a:hover {
+            color: #f1c40f; /* Orange accent from Figma */
+        }
+        .sidebar p {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        .main-content {
+            margin-left: 220px;
+            padding: 20px;
+        }
+        .main-content h2 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        .profile-section {
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+        }
+        .avatar-placeholder {
+            width: 150px;
+            height: 150px;
+            background-color: #ddd;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            text-align: center;
+            line-height: 150px;
+            color: #666;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .form-group a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        .form-group a:hover {
+            color: #f1c40f;
+        }
+        .action-btn {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h3>RENTAL ARENA</h3>
+        <ul>
+            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('search_property') }}">Search Property</a></li>
+            <li><a href="{{ url_for('compare_property') }}">Compare Property</a></li>
+            <li><a href="{{ url_for('settings') }}">Settings</a></li>
+            <li><a href="{{ url_for('profile') }}">Profile</a></li>
+            <li><a href="{{ url_for('support') }}">Support</a></li>
+            <li><a href="{{ url_for('admin_info') }}">Admin Info</a></li>
+        </ul>
+        <p>Welcome back 😊 Jonathan</p>
+    </div>
+    <div class="main-content">
+        <h2>Profile</h2>
+        <div class="profile-section">
+            <div class="avatar-placeholder">Upload Avatar</div>
+            <form>
+                <div class="form-group">
+                    <label for="fullName">Full Name:</label>
+                    <input type="text" id="fullName" value="Jonathan Doe" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" value="jonathan@example.com" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" value="********" disabled>
+                    <a href="#">Change</a>
+                </div>
+                <button type="button" class="action-btn">Pull Data</button>
+                <button type="button" class="action-btn">Save</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
